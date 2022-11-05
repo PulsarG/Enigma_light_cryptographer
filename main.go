@@ -1,51 +1,31 @@
 package main
 
 import (
-	"fmt"
-
+	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/container"
-	"fyne.io/fyne/v2/widget"
 
-	"test/src"
+	"test/consts"
+	"test/mod"
 )
 
 func main() {
-	// создание сущности приложения
-	a := app.New()
+	app := app.New()
+	window := app.NewWindow(consts.NAME_WINDOW)
+	
+	mod.CreateChecks()
+	mod.CreateRadio()
 
-	// создание окна
-	w := a.NewWindow(src.NAME_WINDOW)
-
-	// Текстовая сущность для контента
-	label := widget.NewLabel(src.LABEL_TEXT)
-	label2 := widget.NewLabel(src.LABEL_TEXT_TWO)
-
-	// Создание поля ввода
-	entry := widget.NewEntry()
-
-	// Создание виджета кнопки
-	btn := widget.NewButton(src.BUTTON_TEXT, func() {
-		fmt.Println(entry.Text)
-
-
-		// Присвоение Лейблу-тексту значения из поля ввода
-		label.SetText(entry.Text)
-	})
-
-	// Задаем контент для окна
-	w.SetContent(
-
-		//  контейнер сущность для внедрения объектов
+	window.SetContent(
 		container.NewVBox(
-
-			// помещаем визуальный объект в контейнер
-			label,
-			label2,
-			entry,
-			btn,
+			mod.Label,
+			mod.Label2,
+			mod.Entry,
+			mod.Btn,
+			mod.Checks,
+			mod.Radio,
 		))
 
-	// Вывод окна на экран
-	w.ShowAndRun()
+	window.Resize(fyne.NewSize(consts.WINDOW_WEIGHT, consts.WINDOW_HEIGHT))
+	window.ShowAndRun()
 }
