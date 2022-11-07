@@ -1,5 +1,9 @@
 package consts
 
+import (
+	
+)
+
 const (
 	NAME_WINDOW    = "App"
 	LABEL_TEXT     = "First label"
@@ -7,6 +11,6 @@ const (
 
 	BUTTON_TEXT = "Button text"
 
-	WINDOW_HEIGHT = 400
-	WINDOW_WEIGHT = 500
+	WINDOW_HEIGHT = 700
+	WINDOW_WEIGHT = 900
 )
