@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	NAME_WINDOW    = "App"
+	NAME_WINDOW    = "Шифрование текста"
 	LABEL_TEXT     = "First label"
 	LABEL_TEXT_TWO = "Second label"
 
