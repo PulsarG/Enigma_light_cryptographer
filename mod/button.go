@@ -13,5 +13,4 @@ var Btn = widget.NewButton(consts.BUTTON_TEXT, func() {
 
 	// Присвоение Лейблу-тексту значения из поля ввода
 	Label.SetText(Entry.Text)
-	Label2.SetText(Entry.Text)
 })

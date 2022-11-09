@@ -1,48 +1,50 @@
 package main
 
 import (
-	"image/color"
-
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
-	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/widget"
 
 	"test/consts"
-	"test/mod"
 )
+
+type Cryptor struct {
+	TextField       *widget.Entry
+	Label           widget.Label
+	ButtonTextField widget.Button
+}
 
 func main() {
 	app := app.New()
 	window := app.NewWindow(consts.NAME_WINDOW)
 
-	mod.CreateChecks()
-	mod.CreateRadio()
-	mod.CreateColorLabel()
+	multiLineTextField := widget.NewMultiLineEntry()
 
-	circle := canvas.NewCircle(color.NRGBA{R: 100, G: 150, B: 210, A: 255})
-	circle.StrokeColor = color.NRGBA{R: 190, G: 110, B: 110, A: 255}
-	circle.StrokeWidth = 10
+	Cryptor := NewCryptor(multiLineTextField)
+	Cryptor.setWidgetsInCryptor()
 
-	
-	window = setContentInWindow(window, circle)
-
+	window.SetContent(
+		container.NewGridWithRows(3, Cryptor.TextField, &Cryptor.ButtonTextField, &Cryptor.Label))
 	window.Resize(fyne.NewSize(consts.WINDOW_WEIGHT, consts.WINDOW_HEIGHT))
 	window.ShowAndRun()
 }
 
-func setContentInWindow(window fyne.Window, Circle *canvas.Circle) fyne.Window {
-	Containar := container.NewVBox(
-		mod.Label,
-		mod.Label2,
-		mod.Entry,
-		mod.Btn,
-		mod.Checks,
-		mod.Radio,
-	)
+func NewCryptor(multiLineTextField *widget.Entry) *Cryptor {
+	return &Cryptor{
+		TextField: multiLineTextField,
+	}
+}
 
-	window.SetContent(
-		container.NewGridWithColumns(4, Circle, mod.ColorText, mod.Image, Containar))
+func (c *Cryptor) setWidgetsInCryptor() {
+	c.Label.Text = consts.LABEL_TEXT
+	c.Label.Wrapping = fyne.TextWrapWord
+	c.TextField.SetPlaceHolder("Enter here...")
+	c.TextField.Wrapping = fyne.TextWrapWord
+	c.ButtonTextField.Text = consts.BUTTON_TEXT
+	c.ButtonTextField.OnTapped = func() { c.setTextFromButton() }
+}
 
-	return window
+func (c *Cryptor) setTextFromButton() {
+	c.Label.SetText(c.TextField.Text)
 }
