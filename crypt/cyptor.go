@@ -1,7 +1,12 @@
 package crypt
 
 import (
+	"image/color"
+
 	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/canvas"
+	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 
 	"test/consts"
@@ -42,4 +47,14 @@ func (c *Cryptor) GetLabel() *widget.Label {
 
 func (c *Cryptor) GetButton() *widget.Button {
 	return &c.button
+}
+
+func (c *Cryptor) GetColorButton() *fyne.Container {
+	color := color.RGBA{150, 250, 50, 1}
+	btn := container.New(
+		layout.NewMaxLayout(),
+		canvas.NewRectangle(color),
+		&c.button,
+	)
+	return btn
 }
