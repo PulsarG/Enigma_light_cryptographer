@@ -12,18 +12,19 @@ import (
 	"test/consts"
 	"test/crypt"
 	"test/menu"
+	"test/mod"
 )
 
 func main() {
 	app := app.New()
 	window := app.NewWindow(consts.NAME_WINDOW)
 
-	multiLineTextField := widget.NewMultiLineEntry()
+	/* multiLineTextField := widget.NewMultiLineEntry() */
 
-	Cryptor := crypt.NewCryptor(multiLineTextField)
+	Cryptor := crypt.NewCryptor()
 	Cryptor.SetWidgetsInCryptor()
 
-	saveButton := widget.NewButton("Save", func() {
+	saveButton := widget.NewButton("Сохранить в файл .txt", func() {
 		file, _ := os.Create("text.txt")
 
 		defer file.Close()
@@ -40,9 +41,7 @@ func main() {
 
 	window.Resize(fyne.NewSize(consts.WINDOW_WEIGHT, consts.WINDOW_HEIGHT))
 	window.SetMainMenu(mainMenu)
-
-	Container := container.NewGridWithRows(4, Cryptor.GetTextFild(), Cryptor.GetColorButton(), accordeon, Cryptor.GetLabel())
-
-	window.SetContent(Container)
+	container := container.NewGridWithRows(5, mod.Label2, Cryptor.GetTextFild(), Cryptor.GetColorButton(), accordeon, Cryptor.GetLabel())
+	window.SetContent(container)
 	window.ShowAndRun()
 }

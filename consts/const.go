@@ -3,9 +3,9 @@ package consts
 const (
 	NAME_WINDOW    = "Шифрование текста"
 	LABEL_TEXT     = "First label"
-	LABEL_TEXT_TWO = "Second label"
+	LABEL_TEXT_TWO = "Только буквы русского алфавита,  пробел и символы , . ! ? - ( )"
 
-	BUTTON_TEXT = "Заменить текст"
+	BUTTON_TEXT = "Коввертация текста в float64"
 
 	WINDOW_HEIGHT = 500
 	WINDOW_WEIGHT = 400
