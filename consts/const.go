@@ -1,14 +1,18 @@
 package consts
 
 const (
-	NAME_WINDOW    = "Шифрование текста"
-	LABEL_TEXT     = "First label"
-	LABEL_TEXT_TWO = "Только буквы русского алфавита,  пробел и символы , . ! ? - ( )"
+	NAME_WINDOW           = "Шифрование текста"
+	LABEL_RESULT          = "Результат будет здесь"
+	LABEL_RULES           = "Только буквы русского алфавита,  пробел и символы , . ! ? - ( )"
+	PLACEHOLDER_TEXTFIELD = "Введите текст..."
 
-	BUTTON_TEXT = "Коввертация текста в float64"
+	BUTTON_TEXT = "Начать шифрование"
 
 	WINDOW_HEIGHT = 500
 	WINDOW_WEIGHT = 400
+
+	BUTTON_SAVE_WEIGHT = 200
+	BUTTON_SAVE_HEIGHT = 40
 
 	TITLE_SUBMENU_ONE = "Первое Подменю"
 

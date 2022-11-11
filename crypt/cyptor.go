@@ -19,6 +19,7 @@ import (
 
 type Cryptor struct {
 	textField *widget.Entry
+	keyWord   widget.Entry
 	label     widget.Label
 	button    widget.Button
 }
@@ -35,9 +36,10 @@ func createMultiLineEntry() *widget.Entry {
 }
 
 func (c *Cryptor) SetWidgetsInCryptor() {
-	c.label.Text = consts.LABEL_TEXT
+	c.label.Text = consts.LABEL_RESULT
 	c.label.Wrapping = fyne.TextWrapWord
-	c.textField.SetPlaceHolder("Enter here...")
+	c.textField.SetPlaceHolder(consts.PLACEHOLDER_TEXTFIELD)
+	c.keyWord.SetPlaceHolder("Ключ-слово")
 	c.textField.Wrapping = fyne.TextWrapWord
 	c.button.Text = consts.BUTTON_TEXT
 	c.button.OnTapped = func() { c.testCrypt() }
@@ -56,14 +58,19 @@ func (c *Cryptor) converToFloat() {
 	}
 }
 
-
-
 func (c *Cryptor) testCrypt() {
-	anna.StartCrypt(c.textField.Text)
+	code := anna.StartCrypt(c.textField.Text)
+	c.label.SetText(code)
 }
 
 func (c *Cryptor) GetTextFild() *widget.Entry {
 	return c.textField
+}
+
+func (c *Cryptor) GetKeyWordWithSize(w, h float32) *fyne.Container {
+	container := container.NewWithoutLayout(&c.keyWord)
+	c.keyWord.Resize(fyne.NewSize(w, h))
+	return container
 }
 
 func (c *Cryptor) GetLabel() *widget.Label {
@@ -74,12 +81,14 @@ func (c *Cryptor) GetButton() *widget.Button {
 	return &c.button
 }
 
-func (c *Cryptor) GetColorButton() *fyne.Container {
+func (c *Cryptor) GetColorButtonWithSize(w, h float32) *fyne.Container {
 	color := color.RGBA{11, 78, 150, 1}
 	btn := container.New(
 		layout.NewMaxLayout(),
 		canvas.NewRectangle(color),
 		&c.button,
 	)
-	return btn
+	container := container.NewWithoutLayout(btn)
+	btn.Resize(fyne.NewSize(w, h))
+	return container
 }

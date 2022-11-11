@@ -8,10 +8,8 @@ import (
 	"test/consts"
 )
 
-// Текстовая сущность для контента
-
-var Label = widget.NewLabel(consts.LABEL_TEXT)
-var Label2 = widget.NewLabel(consts.LABEL_TEXT_TWO)
+var Label = widget.NewLabel(consts.LABEL_RESULT)
+var LabelRules = widget.NewLabel(consts.LABEL_RULES)
 
 var ColorText *canvas.Text
 var COLOR_FOR_ColorText = color.NRGBA{R: 100, G: 150, B: 210, A: 255}

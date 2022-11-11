@@ -2,6 +2,7 @@ package anna
 
 import (
 	"fmt"
+	"strconv"
 	/* "strings" */
 	"test/base"
 )
@@ -16,12 +17,18 @@ import (
 //
 //
 
-func StartCrypt(text string) {
+func StartCrypt(text string) string {
 	signArr := convertStringToArray(text)
 	fmt.Println("Длина текста в символах: ", len(signArr))
 
 	numArr := findNumberSing(signArr)
 	fmt.Println(numArr)
+	var s string
+	for i := 0; i < len(numArr); i++ {
+		number := strconv.Itoa(numArr[i])
+		s = s + number
+	}
+	return s
 }
 
 func convertStringToArray(s string) []string {
@@ -34,14 +41,15 @@ func convertStringToArray(s string) []string {
 
 func findNumberSing(signArr []string) []int {
 	var numArr []int
-	newBaseSign := replaceSignArray(1)
+	newBaseSign := replaceSignArray(5)
+	fmt.Println(newBaseSign)
 	for numSignText := 0; numSignText < len(signArr); numSignText++ {
 
 		oneSign := signArr[numSignText]
 
 		for i := 0; i < len(newBaseSign); i++ {
 			if oneSign == newBaseSign[i] {
-				numArr = append(numArr, i+1)
+				numArr = append(numArr, i)
 				break
 			}
 		}
@@ -56,7 +64,7 @@ func replaceSignArray(n int) [51]string {
 		sign := base.SignsArray[i]
 		if i < n {
 			j := i
-			j += 51
+			j += len(base.SignsArray)
 			j -= n
 			newSignArr[j] = sign
 		} else {
@@ -65,6 +73,6 @@ func replaceSignArray(n int) [51]string {
 			newSignArr[j] = sign
 		}
 	}
-	
+
 	return newSignArr
 }
