@@ -1,7 +1,7 @@
 package consts
 
 const (
-	NAME_WINDOW           = "Шифрование текста"
+	NAME_WINDOW           = "AnnaCrypt v0.2"
 	LABEL_RESULT          = "Результат будет здесь"
 	LABEL_RULES           = "Только буквы русского алфавита,  пробел и символы , . ! ? - ( )"
 	PLACEHOLDER_TEXTFIELD = "Введите текст..."

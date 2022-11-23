@@ -59,7 +59,7 @@ func (c *Cryptor) converToFloat() {
 }
 
 func (c *Cryptor) testCrypt() {
-	code := anna.StartCrypt(c.textField.Text)
+	code := anna.StartCrypt(c.textField.Text, c.keyWord.Text)
 	c.label.SetText(code)
 }
 
