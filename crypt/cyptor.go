@@ -5,6 +5,7 @@ import (
 	"image/color"
 	"reflect"
 	"strconv"
+
 	/* "strings" */
 
 	"fyne.io/fyne/v2"
@@ -15,6 +16,7 @@ import (
 
 	"test/anna"
 	"test/consts"
+	"test/elem"
 )
 
 type Cryptor struct {
@@ -61,6 +63,7 @@ func (c *Cryptor) converToFloat() {
 func (c *Cryptor) testCrypt() {
 	code := anna.StartCrypt(c.textField.Text, c.keyWord.Text)
 	c.label.SetText(code)
+	elem.SaveButton.Hide()
 }
 
 func (c *Cryptor) GetTextFild() *widget.Entry {

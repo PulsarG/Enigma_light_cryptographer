@@ -9,12 +9,13 @@ import (
 	"test/consts"
 )
 
-func CreateMenu(text *widget.Entry, label *widget.Label) *fyne.MainMenu {
+func CreateMenu(textForLabel *widget.Entry, label *widget.Label) *fyne.MainMenu {
 
 	buttonSubmenuOne := fyne.NewMenuItem(consts.MENU_SUBMENU_ONE_BTN_ONE_TITLE, func() {
-		label.SetText(text.Text)
+		label.SetText(textForLabel.Text)
 	})
 	buttonSubmenuTwo := createButtonsSubMenu(consts.MENU_SUBMENU_ONE_BTN_TWO_TITLE)
+	buttonSubmenuTwo2 := createButtonsSubMenu("test menu")
 	buttonSubmenuTree := fyne.NewMenuItem(consts.MENU_SUBMENU_ONE_BTN_TREE_TITLE, nil)
 	buttonSubmenuTree.ChildMenu = fyne.NewMenu(
 		"",
@@ -22,10 +23,10 @@ func CreateMenu(text *widget.Entry, label *widget.Label) *fyne.MainMenu {
 		fyne.NewMenuItem("Text2", nil),
 	)
 
-	subemenuOne := fyne.NewMenu(consts.TITLE_SUBMENU_ONE, buttonSubmenuOne, buttonSubmenuTwo, buttonSubmenuTree)
+	subemenuOne := fyne.NewMenu(consts.TITLE_SUBMENU_ONE, buttonSubmenuOne, buttonSubmenuTwo, buttonSubmenuTwo2, buttonSubmenuTree)
 
 	mainMenu := fyne.NewMainMenu(subemenuOne)
-
+	
 	return mainMenu
 }
 

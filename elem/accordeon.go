@@ -1,4 +1,4 @@
-package accord
+package elem
 
 import (
 	"fyne.io/fyne/v2/widget"

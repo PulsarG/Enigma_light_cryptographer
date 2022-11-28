@@ -1,4 +1,4 @@
-package mod
+package elem
 
 import (
 	"fyne.io/fyne/v2/canvas"
