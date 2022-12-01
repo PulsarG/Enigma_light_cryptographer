@@ -19,14 +19,14 @@ func CreateMenu(textForLabel *widget.Entry, label *widget.Label) *fyne.MainMenu 
 	buttonSubmenuTree := fyne.NewMenuItem(consts.MENU_SUBMENU_ONE_BTN_TREE_TITLE, nil)
 	buttonSubmenuTree.ChildMenu = fyne.NewMenu(
 		"",
-		fyne.NewMenuItem("text1", nil),
+		fyne.NewMenuItem(consts.MENU_SUBMENU_ONEBTN_SETTINGS_TITLE, nil),
 		fyne.NewMenuItem("Text2", nil),
 	)
 
 	subemenuOne := fyne.NewMenu(consts.TITLE_SUBMENU_ONE, buttonSubmenuOne, buttonSubmenuTwo, buttonSubmenuTwo2, buttonSubmenuTree)
 
 	mainMenu := fyne.NewMainMenu(subemenuOne)
-	
+
 	return mainMenu
 }
 

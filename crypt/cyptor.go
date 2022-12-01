@@ -15,20 +15,23 @@ import (
 	"fyne.io/fyne/v2/widget"
 
 	"test/anna"
+	/* 	"test/apps" */
 	"test/consts"
-	"test/elem"
-)
+	/* "test/elem" */)
 
 type Cryptor struct {
 	textField *widget.Entry
 	keyWord   widget.Entry
 	label     widget.Label
 	button    widget.Button
+	/* windowResult fyne.Window */
+	App fyne.App
 }
 
-func NewCryptor() *Cryptor {
+func NewCryptor(app fyne.App) *Cryptor {
 	return &Cryptor{
 		textField: createMultiLineEntry(),
+		App:       app,
 	}
 }
 
@@ -63,7 +66,9 @@ func (c *Cryptor) converToFloat() {
 func (c *Cryptor) testCrypt() {
 	code := anna.StartCrypt(c.textField.Text, c.keyWord.Text)
 	c.label.SetText(code)
-	elem.SaveButton.Hide()
+
+	wr := c.createWindowResult()
+	wr.Show()
 }
 
 func (c *Cryptor) GetTextFild() *widget.Entry {
@@ -94,4 +99,14 @@ func (c *Cryptor) GetColorButtonWithSize(w, h float32) *fyne.Container {
 	container := container.NewWithoutLayout(btn)
 	btn.Resize(fyne.NewSize(w, h))
 	return container
+}
+
+func (c *Cryptor) createWindowResult() fyne.Window {
+	windowR := c.App.NewWindow(consts.NAME_WINDOW_RESULT)
+	windowR.Resize(fyne.NewSize(consts.WINDOW_WEIGHT, consts.WINDOW_HEIGHT))
+
+	container := container.NewGridWithRows(1, &c.label)
+	windowR.SetContent(container)
+
+	return windowR
 }
