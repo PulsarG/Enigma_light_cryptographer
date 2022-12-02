@@ -15,23 +15,26 @@ import (
 	"fyne.io/fyne/v2/widget"
 
 	"test/anna"
+	/* 	"test/elem" */
 	/* 	"test/apps" */
 	"test/consts"
 	/* "test/elem" */)
 
 type Cryptor struct {
-	textField *widget.Entry
-	keyWord   widget.Entry
-	label     widget.Label
-	button    widget.Button
-	/* windowResult fyne.Window */
-	App fyne.App
+	textField   *widget.Entry
+	keyWord     widget.Entry
+	button      widget.Button
+	progressBar widget.ProgressBarInfinite
+
+	App      fyne.App
+	Resulter *Resulter
 }
 
 func NewCryptor(app fyne.App) *Cryptor {
 	return &Cryptor{
 		textField: createMultiLineEntry(),
 		App:       app,
+		Resulter:  NewResulter(app),
 	}
 }
 
@@ -41,17 +44,11 @@ func createMultiLineEntry() *widget.Entry {
 }
 
 func (c *Cryptor) SetWidgetsInCryptor() {
-	c.label.Text = consts.LABEL_RESULT
-	c.label.Wrapping = fyne.TextWrapWord
 	c.textField.SetPlaceHolder(consts.PLACEHOLDER_TEXTFIELD)
 	c.keyWord.SetPlaceHolder("Ключ-слово")
 	c.textField.Wrapping = fyne.TextWrapWord
 	c.button.Text = consts.BUTTON_TEXT
 	c.button.OnTapped = func() { c.testCrypt() }
-}
-
-func (c *Cryptor) setTextFromButton() {
-	c.label.SetText(c.textField.Text)
 }
 
 func (c *Cryptor) converToFloat() {
@@ -64,11 +61,14 @@ func (c *Cryptor) converToFloat() {
 }
 
 func (c *Cryptor) testCrypt() {
-	code := anna.StartCrypt(c.textField.Text, c.keyWord.Text)
-	c.label.SetText(code)
+	c.progressBar.Show()
 
-	wr := c.createWindowResult()
-	wr.Show()
+	code, ready := anna.StartCrypt(c.textField.Text, c.keyWord.Text)
+
+	if ready {
+		c.Resulter.openWindowResult(code)
+		c.progressBar.Hide()
+	}
 }
 
 func (c *Cryptor) GetTextFild() *widget.Entry {
@@ -79,10 +79,6 @@ func (c *Cryptor) GetKeyWordWithSize(w, h float32) *fyne.Container {
 	container := container.NewWithoutLayout(&c.keyWord)
 	c.keyWord.Resize(fyne.NewSize(w, h))
 	return container
-}
-
-func (c *Cryptor) GetLabel() *widget.Label {
-	return &c.label
 }
 
 func (c *Cryptor) GetButton() *widget.Button {
@@ -101,12 +97,35 @@ func (c *Cryptor) GetColorButtonWithSize(w, h float32) *fyne.Container {
 	return container
 }
 
-func (c *Cryptor) createWindowResult() fyne.Window {
+func (c *Cryptor) GetProgressBar() *widget.ProgressBarInfinite {
+	return &c.progressBar
+}
+
+/* func (c *Cryptor) createWindowResult() fyne.Window {
 	windowR := c.App.NewWindow(consts.NAME_WINDOW_RESULT)
 	windowR.Resize(fyne.NewSize(consts.WINDOW_WEIGHT, consts.WINDOW_HEIGHT))
 
-	container := container.NewGridWithRows(1, &c.label)
-	windowR.SetContent(container)
+	windowR.SetContent(c.createContainersForWindowResult())
 
 	return windowR
-}
+} */
+
+/* func (c *Cryptor) openWindowResult() {
+	if c.windowResult != nil {
+		c.windowResult.Close()
+	}
+	c.windowResult = c.createWindowResult()
+	c.windowResult.Show()
+} */
+/*
+func (c *Cryptor) createContainersForWindowResult() *fyne.Container {
+	containerWithResult := container.NewGridWithRows(1, &c.label)
+
+	containerWithSaveButton := container.NewGridWithColumns(2, elem.SaveButton, elem.SaveButton)
+	containerWithOpenButton := container.NewGridWithColumns(2, elem.OpenButton, elem.OpenButton)
+
+	containatWithButtons := container.NewGridWithRows(2, containerWithSaveButton, containerWithOpenButton)
+
+	container := container.NewGridWithRows(2, containerWithResult, containatWithButtons)
+	return container
+} */

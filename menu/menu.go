@@ -9,10 +9,10 @@ import (
 	"test/consts"
 )
 
-func CreateMenu(textForLabel *widget.Entry, label *widget.Label) *fyne.MainMenu {
+func CreateMenu(textForLabel *widget.Entry) *fyne.MainMenu {
 
 	buttonSubmenuOne := fyne.NewMenuItem(consts.MENU_SUBMENU_ONE_BTN_ONE_TITLE, func() {
-		label.SetText(textForLabel.Text)
+		fmt.Println("sefsef")
 	})
 	buttonSubmenuTwo := createButtonsSubMenu(consts.MENU_SUBMENU_ONE_BTN_TWO_TITLE)
 	buttonSubmenuTwo2 := createButtonsSubMenu("test menu")

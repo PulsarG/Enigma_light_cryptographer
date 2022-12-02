@@ -15,7 +15,7 @@ import (
 //
 //
 
-func StartCrypt(text, key string) string {
+func StartCrypt(text, key string) (string, bool) {
 	lenKeyWord := getKeyWordData(key)
 
 	signArr := convertStringToArray(text)
@@ -28,7 +28,7 @@ func StartCrypt(text, key string) string {
 		number := strconv.Itoa(numArr[i])
 		s = s + number
 	}
-	return s
+	return s, true
 }
 
 func convertStringToArray(s string) []string {

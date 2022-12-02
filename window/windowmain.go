@@ -17,13 +17,13 @@ import (
 func CreateMainWindow(app fyne.App, Cryptor *crypt.Cryptor) fyne.Window {
 	window := app.NewWindow(consts.NAME_WINDOW_MAIN)
 
-	mainMenu := menu.CreateMenu(Cryptor.GetTextFild(), Cryptor.GetLabel())
+	mainMenu := menu.CreateMenu(Cryptor.GetTextFild())
 
 	elem.LabelRules.TextStyle = fyne.TextStyle{Italic: true}
 
-	progressBarInfinite := widget.NewProgressBarInfinite()
-	containerProgressbar := container.NewWithoutLayout(progressBarInfinite)
-	progressBarInfinite.Resize(fyne.NewSize(500, 10))
+	containerProgressbar := container.NewWithoutLayout(Cryptor.GetProgressBar())
+	Cryptor.GetProgressBar().Resize(fyne.NewSize(500, 10))
+	Cryptor.GetProgressBar().Hide()
 
 	window.SetMainMenu(mainMenu)
 	window.SetContent(createContainers(Cryptor, containerProgressbar))
