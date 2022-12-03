@@ -4,12 +4,12 @@ import (
 	"fmt"
 
 	"fyne.io/fyne/v2"
-	"fyne.io/fyne/v2/widget"
+	/* "fyne.io/fyne/v2/widget" */
 
 	"test/consts"
 )
 
-func CreateMenu(textForLabel *widget.Entry) *fyne.MainMenu {
+func CreateMenu() *fyne.MainMenu {
 
 	buttonSubmenuOne := fyne.NewMenuItem(consts.MENU_SUBMENU_ONE_BTN_ONE_TITLE, func() {
 		fmt.Println("sefsef")

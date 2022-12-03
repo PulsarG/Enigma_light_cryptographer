@@ -7,12 +7,13 @@ const (
 	LABEL_RESULT          = "Результат будет здесь"
 	LABEL_RULES           = "Только буквы русского алфавита,  пробел и символы , . ! ? - ( )"
 	PLACEHOLDER_TEXTFIELD = "Введите текст..."
+	KEY_WORD_TITLE        = "Ключ-слово"
 
 	// Основная кнопка
 	BUTTON_TEXT = "Начать шифрование"
 
 	// Размеры окна
-	WINDOW_HEIGHT = 500
+	WINDOW_HEIGHT = 550
 	WINDOW_WEIGHT = 400
 
 	// Кнопка сохранения
@@ -30,4 +31,9 @@ const (
 
 	// Аккордеон
 	ACCORDEON_ONE_TITLE = "Аккордеон с кнопкой сохранения"
+
+	// Диалог отсутствия ключа-слова
+	DIALOG_KEY_WINDOW_TITILE = "Проблема шифрования"
+	DIALOG_KEY_ERROR_TEXT    = "Не введено ключ-слово"
+	DIALOG_KEY_BTN_TITLE     = "Ясно"
 )

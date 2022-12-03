@@ -2,9 +2,11 @@ package crypt
 
 import (
 	"fmt"
+	"io"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/widget"
 
 	"test/consts"
@@ -52,27 +54,50 @@ func (r *Resulter) createContainersForWindowResult() *fyne.Container {
 
 	labelResultCode := widget.NewLabel(r.code)
 	labelResultCode.Wrapping = fyne.TextWrapWord
-	containerWithResult := container.NewGridWithRows(1, labelResultCode)
+	containerLabelResult := container.NewWithoutLayout(labelResultCode)
+	labelResultCode.Resize(fyne.NewSize(500, 400))
+	/* containerWithResult := container.NewGridWithRows(1, containerLabelResult) */
 
-	saveFileButton := elem.NewButton("Сохранить в файл .txt", saveFile)
-	openFileButton := elem.NewButton("Открыть файл", openFile)
-	containerWithSaveButton := container.NewGridWithColumns(2, saveFileButton, saveFileButton)
-	containerWithOpenButton := container.NewGridWithColumns(2, openFileButton, openFileButton)
+	containatWithButtons := r.createContainerWithButtons()
 
-	containatWithButtons := container.NewGridWithRows(2, containerWithSaveButton, containerWithOpenButton)
-
-	container := container.NewGridWithRows(2, containerWithResult, containatWithButtons)
+	container := container.NewGridWithRows(2, containerLabelResult, containatWithButtons)
 	return container
+}
+
+func (r *Resulter) createContainerWithButtons() *fyne.Container {
+	saveFileButton := elem.NewButton("Сохранить в файл", r.saveFile)
+	openFileButton := elem.NewButton("Открыть файл", r.openFile)
+
+	containerSaveButton := container.NewWithoutLayout(saveFileButton)
+	saveFileButton.Resize(fyne.NewSize(200, 50))
+	containerOpenButton := container.NewWithoutLayout(openFileButton)
+	openFileButton.Resize(fyne.NewSize(200, 50))
+
+	containatWithButtons := container.NewGridWithColumns(2, containerSaveButton, containerOpenButton)
+	return containatWithButtons
 }
 
 func (r *Resulter) closeResultWindow() {
 	r.windowResult.Close()
 }
 
-func saveFile() {
+func (r *Resulter) saveFile() {
+	dialog.ShowFileSave(
+		func(uc fyne.URIWriteCloser, err error) {
+			io.WriteString(uc, r.code)
+		}, r.windowResult,
+	)
 	fmt.Println("File is Save")
 }
 
-func openFile() {
+func (r *Resulter) openFile() {
+	dialog.ShowFileOpen(
+		func(uc fyne.URIReadCloser, err error) {
+			data, _ := io.ReadAll(uc)
+
+			d := string(data)
+			r.openWindowResult(d)
+		}, r.windowResult,
+	)
 	fmt.Println("File is Open")
 }

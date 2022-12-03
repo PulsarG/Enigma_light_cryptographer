@@ -49,7 +49,7 @@ func createMultiLineEntry() *widget.Entry {
 
 func (c *Cryptor) SetWidgetsInCryptor() {
 	c.textField.SetPlaceHolder(consts.PLACEHOLDER_TEXTFIELD)
-	c.keyWord.SetPlaceHolder("Ключ-слово")
+	c.keyWord.SetPlaceHolder(consts.KEY_WORD_TITLE)
 	c.textField.Wrapping = fyne.TextWrapWord
 	c.button = *elem.NewButton(consts.BUTTON_TEXT, c.startCrypt)
 	c.mainwindow = c.createMainWindow()
@@ -74,12 +74,14 @@ func (c *Cryptor) startCrypt() {
 			c.Resulter.openWindowResult(code)
 			c.progressBar.Hide()
 		}
+	} else {
+		c.showDialogKeyEmpty()
 	}
 }
 
 func (c *Cryptor) checkKey() bool {
 	if c.keyWord.Text == "" {
-		c.showDialogKeyEmpty()
+		/* c.showDialogKeyEmpty() */
 		return false
 	} else {
 		return true
@@ -140,13 +142,18 @@ func (c *Cryptor) showDialogKeyEmpty() {
 		}
 	}, w) */
 
-	dialog.ShowCustom("Hello", "Press", widget.NewLabel("BB"), c.mainwindow)
+	dialog.ShowCustom(
+		consts.DIALOG_KEY_WINDOW_TITILE,
+		consts.DIALOG_KEY_BTN_TITLE,
+		widget.NewLabel(consts.DIALOG_KEY_ERROR_TEXT),
+		c.mainwindow)
+
 }
 
 func (c *Cryptor) createMainWindow() fyne.Window {
 	window := c.App.NewWindow(consts.NAME_WINDOW_MAIN)
 
-	mainMenu := menu.CreateMenu(c.GetTextFild())
+	mainMenu := menu.CreateMenu()
 
 	elem.LabelRules.TextStyle = fyne.TextStyle{Italic: true}
 
@@ -161,7 +168,11 @@ func (c *Cryptor) createMainWindow() fyne.Window {
 }
 
 func (c *Cryptor) createContainers(pb *fyne.Container) *fyne.Container {
+	containerTextField := container.NewWithoutLayout(c.textField)
+	c.textField.Resize(fyne.NewSize(500, 300))
+	c.textField.Move(fyne.NewPos(0, -100))
+
 	containerWithKeyAndButtonStart := container.NewGridWithColumns(2, c.GetKeyWordWithSize(200, 40), c.GetColorButtonWithSize(200, 40))
-	containerFull := container.NewGridWithRows(4, elem.LabelRules, c.GetTextFild(), pb, containerWithKeyAndButtonStart)
+	containerFull := container.NewGridWithRows(4, elem.LabelRules, containerTextField, pb, containerWithKeyAndButtonStart)
 	return containerFull
 }
