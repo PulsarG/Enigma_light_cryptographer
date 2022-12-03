@@ -11,11 +11,14 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/dialog"
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 
 	"test/anna"
-	/* 	"test/elem" */
+	"test/elem"
+	"test/menu"
+	/* "test/window" */
 	/* 	"test/apps" */
 	"test/consts"
 	/* "test/elem" */)
@@ -25,6 +28,7 @@ type Cryptor struct {
 	keyWord     widget.Entry
 	button      widget.Button
 	progressBar widget.ProgressBarInfinite
+	mainwindow  fyne.Window
 
 	App      fyne.App
 	Resulter *Resulter
@@ -47,8 +51,8 @@ func (c *Cryptor) SetWidgetsInCryptor() {
 	c.textField.SetPlaceHolder(consts.PLACEHOLDER_TEXTFIELD)
 	c.keyWord.SetPlaceHolder("Ключ-слово")
 	c.textField.Wrapping = fyne.TextWrapWord
-	c.button.Text = consts.BUTTON_TEXT
-	c.button.OnTapped = func() { c.testCrypt() }
+	c.button = *elem.NewButton(consts.BUTTON_TEXT, c.startCrypt)
+	c.mainwindow = c.createMainWindow()
 }
 
 func (c *Cryptor) converToFloat() {
@@ -60,15 +64,30 @@ func (c *Cryptor) converToFloat() {
 	}
 }
 
-func (c *Cryptor) testCrypt() {
-	c.progressBar.Show()
+func (c *Cryptor) startCrypt() {
+	if c.checkKey() {
+		c.progressBar.Show()
 
-	code, ready := anna.StartCrypt(c.textField.Text, c.keyWord.Text)
+		code, ready := anna.StartCrypt(c.textField.Text, c.keyWord.Text)
 
-	if ready {
-		c.Resulter.openWindowResult(code)
-		c.progressBar.Hide()
+		if ready {
+			c.Resulter.openWindowResult(code)
+			c.progressBar.Hide()
+		}
 	}
+}
+
+func (c *Cryptor) checkKey() bool {
+	if c.keyWord.Text == "" {
+		c.showDialogKeyEmpty()
+		return false
+	} else {
+		return true
+	}
+}
+
+func (c *Cryptor) GetWindowMain() fyne.Window {
+	return c.mainwindow
 }
 
 func (c *Cryptor) GetTextFild() *widget.Entry {
@@ -101,31 +120,48 @@ func (c *Cryptor) GetProgressBar() *widget.ProgressBarInfinite {
 	return &c.progressBar
 }
 
-/* func (c *Cryptor) createWindowResult() fyne.Window {
-	windowR := c.App.NewWindow(consts.NAME_WINDOW_RESULT)
-	windowR.Resize(fyne.NewSize(consts.WINDOW_WEIGHT, consts.WINDOW_HEIGHT))
+func (c *Cryptor) showDialogKeyEmpty() {
 
-	windowR.SetContent(c.createContainersForWindowResult())
+	/* dialog.ShowConfirm("Dialog Window", "Hello, World", func(b bool) {
+		if b == true {
+			fmt.Println("Yes")
 
-	return windowR
-} */
+		} else {
+			fmt.Println("No")
+		}
+	}, w) */
 
-/* func (c *Cryptor) openWindowResult() {
-	if c.windowResult != nil {
-		c.windowResult.Close()
-	}
-	c.windowResult = c.createWindowResult()
-	c.windowResult.Show()
-} */
-/*
-func (c *Cryptor) createContainersForWindowResult() *fyne.Container {
-	containerWithResult := container.NewGridWithRows(1, &c.label)
+	/* dialog.ShowCustomConfirm("Hello", "Да", "Нет", widget.NewLabel("Set answer"), func(b bool) {
+		if b == true {
+			fmt.Println("Yes")
 
-	containerWithSaveButton := container.NewGridWithColumns(2, elem.SaveButton, elem.SaveButton)
-	containerWithOpenButton := container.NewGridWithColumns(2, elem.OpenButton, elem.OpenButton)
+		} else {
+			fmt.Println("No")
+		}
+	}, w) */
 
-	containatWithButtons := container.NewGridWithRows(2, containerWithSaveButton, containerWithOpenButton)
+	dialog.ShowCustom("Hello", "Press", widget.NewLabel("BB"), c.mainwindow)
+}
 
-	container := container.NewGridWithRows(2, containerWithResult, containatWithButtons)
-	return container
-} */
+func (c *Cryptor) createMainWindow() fyne.Window {
+	window := c.App.NewWindow(consts.NAME_WINDOW_MAIN)
+
+	mainMenu := menu.CreateMenu(c.GetTextFild())
+
+	elem.LabelRules.TextStyle = fyne.TextStyle{Italic: true}
+
+	containerProgressbar := container.NewWithoutLayout(c.GetProgressBar())
+	c.GetProgressBar().Resize(fyne.NewSize(500, 10))
+	c.GetProgressBar().Hide()
+
+	window.SetMainMenu(mainMenu)
+	window.SetContent(c.createContainers(containerProgressbar))
+	window.Resize(fyne.NewSize(consts.WINDOW_WEIGHT, consts.WINDOW_HEIGHT))
+	return window
+}
+
+func (c *Cryptor) createContainers(pb *fyne.Container) *fyne.Container {
+	containerWithKeyAndButtonStart := container.NewGridWithColumns(2, c.GetKeyWordWithSize(200, 40), c.GetColorButtonWithSize(200, 40))
+	containerFull := container.NewGridWithRows(4, elem.LabelRules, c.GetTextFild(), pb, containerWithKeyAndButtonStart)
+	return containerFull
+}

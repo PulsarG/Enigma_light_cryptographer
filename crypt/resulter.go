@@ -1,7 +1,7 @@
 package crypt
 
 import (
-	/* "fmt" */
+	"fmt"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
@@ -54,8 +54,10 @@ func (r *Resulter) createContainersForWindowResult() *fyne.Container {
 	labelResultCode.Wrapping = fyne.TextWrapWord
 	containerWithResult := container.NewGridWithRows(1, labelResultCode)
 
-	containerWithSaveButton := container.NewGridWithColumns(2, elem.SaveButton, elem.SaveButton)
-	containerWithOpenButton := container.NewGridWithColumns(2, elem.OpenButton, elem.OpenButton)
+	saveFileButton := elem.NewButton("Сохранить в файл .txt", saveFile)
+	openFileButton := elem.NewButton("Открыть файл", openFile)
+	containerWithSaveButton := container.NewGridWithColumns(2, saveFileButton, saveFileButton)
+	containerWithOpenButton := container.NewGridWithColumns(2, openFileButton, openFileButton)
 
 	containatWithButtons := container.NewGridWithRows(2, containerWithSaveButton, containerWithOpenButton)
 
@@ -65,4 +67,12 @@ func (r *Resulter) createContainersForWindowResult() *fyne.Container {
 
 func (r *Resulter) closeResultWindow() {
 	r.windowResult.Close()
+}
+
+func saveFile() {
+	fmt.Println("File is Save")
+}
+
+func openFile() {
+	fmt.Println("File is Open")
 }

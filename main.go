@@ -4,7 +4,6 @@ import (
 	"fyne.io/fyne/v2/app"
 
 	"test/crypt"
-	"test/window"
 )
 
 func main() {
@@ -13,7 +12,7 @@ func main() {
 	Cryptor := crypt.NewCryptor(app)
 	Cryptor.SetWidgetsInCryptor()
 
-	windowMain := window.CreateMainWindow(app, Cryptor)
+	windowMain := Cryptor.GetWindowMain()
 
 	windowMain.Show()
 	windowMain.SetMaster()
