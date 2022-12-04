@@ -3,6 +3,7 @@ package crypt
 import (
 	"fmt"
 	"image/color"
+	"io"
 	"reflect"
 	"strconv"
 
@@ -48,7 +49,7 @@ func createMultiLineEntry() *widget.Entry {
 }
 
 func (c *Cryptor) SetWidgetsInCryptor() {
-	c.textField.SetPlaceHolder(consts.PLACEHOLDER_TEXTFIELD)
+	c.textField.SetPlaceHolder(consts.LABEL_RULES)
 	c.keyWord.SetPlaceHolder(consts.KEY_WORD_TITLE)
 	c.textField.Wrapping = fyne.TextWrapWord
 	c.button = *elem.NewButton(consts.BUTTON_TEXT, c.startCrypt)
@@ -99,6 +100,7 @@ func (c *Cryptor) GetTextFild() *widget.Entry {
 func (c *Cryptor) GetKeyWordWithSize(w, h float32) *fyne.Container {
 	container := container.NewWithoutLayout(&c.keyWord)
 	c.keyWord.Resize(fyne.NewSize(w, h))
+	c.keyWord.Move(fyne.NewPos(20, 0))
 	return container
 }
 
@@ -115,6 +117,7 @@ func (c *Cryptor) GetColorButtonWithSize(w, h float32) *fyne.Container {
 	)
 	container := container.NewWithoutLayout(btn)
 	btn.Resize(fyne.NewSize(w, h))
+	btn.Move(fyne.NewPos(-20, 0))
 	return container
 }
 
@@ -157,8 +160,8 @@ func (c *Cryptor) createMainWindow() fyne.Window {
 
 	elem.LabelRules.TextStyle = fyne.TextStyle{Italic: true}
 
-	containerProgressbar := container.NewWithoutLayout(c.GetProgressBar())
-	c.GetProgressBar().Resize(fyne.NewSize(500, 10))
+	containerProgressbar := container.NewVBox(c.GetProgressBar())
+	/* c.GetProgressBar().Resize(fyne.NewSize(500, 10)) */
 	c.GetProgressBar().Hide()
 
 	window.SetMainMenu(mainMenu)
@@ -168,11 +171,54 @@ func (c *Cryptor) createMainWindow() fyne.Window {
 }
 
 func (c *Cryptor) createContainers(pb *fyne.Container) *fyne.Container {
-	containerTextField := container.NewWithoutLayout(c.textField)
-	c.textField.Resize(fyne.NewSize(500, 300))
-	c.textField.Move(fyne.NewPos(0, -100))
+	containerTextField := container.NewVBox(c.textField)
 
-	containerWithKeyAndButtonStart := container.NewGridWithColumns(2, c.GetKeyWordWithSize(200, 40), c.GetColorButtonWithSize(200, 40))
-	containerFull := container.NewGridWithRows(4, elem.LabelRules, containerTextField, pb, containerWithKeyAndButtonStart)
+	containerWithKeyAndButtonStart := container.NewVBox(
+		container.NewHBox(
+			c.GetKeyWordWithSize(200, 40),
+			layout.NewSpacer(),
+			c.GetColorButtonWithSize(200, 40),
+		),
+	)
+	containerWithKeyAndButtonStart.Move(fyne.NewPos(0, 50))
+
+	btnOpen := elem.NewButton("Открыть файл и расшифровать", c.openFile)
+
+	containerBtnOpen := container.NewWithoutLayout(btnOpen)
+	btnOpen.Resize(fyne.NewSize(300, 40))
+	btnOpen.Move(fyne.NewPos(-30, 20))
+
+	containerWithOpenButton := container.NewHBox(
+		layout.NewSpacer(),
+		containerBtnOpen,
+	)
+
+	containerWithAllButton := container.NewVBox(
+		containerWithKeyAndButtonStart,
+		layout.NewSpacer(),
+		containerWithOpenButton,
+	)
+
+	containerFull := container.NewVBox(
+		/* elem.LabelRules, */
+		containerTextField,
+		pb,
+		/* layout.NewSpacer(), */
+		containerWithAllButton)
 	return containerFull
+}
+
+func (c *Cryptor) openFile() {
+	if c.checkKey() {
+		dialog.ShowFileOpen(
+			func(uc fyne.URIReadCloser, err error) {
+				data, _ := io.ReadAll(uc)
+
+				d := string(data)
+				c.textField.SetText(d)
+			}, c.mainwindow,
+		)
+	} else {
+		c.showDialogKeyEmpty()
+	}
 }

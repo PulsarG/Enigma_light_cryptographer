@@ -14,7 +14,7 @@ const (
 
 	// Размеры окна
 	WINDOW_HEIGHT = 550
-	WINDOW_WEIGHT = 400
+	WINDOW_WEIGHT = 550
 
 	// Кнопка сохранения
 	BUTTON_SAVE_WEIGHT = 200
