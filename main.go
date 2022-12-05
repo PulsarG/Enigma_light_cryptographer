@@ -10,12 +10,8 @@ func main() {
 	app := app.New()
 
 	Cryptor := crypt.NewCryptor(app)
-	/* Cryptor.SetWidgetsInCryptor() */
+	Cryptor.Start()
 
-	windowMain := Cryptor.CreateMainWindow()
-
-	windowMain.Show()
-	windowMain.SetMaster()
 	app.Run()
 }
 

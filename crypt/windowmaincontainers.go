@@ -14,37 +14,37 @@ import (
 	"fyne.io/fyne/v2/container"
 	/* "fyne.io/fyne/v2/dialog" */
 	"fyne.io/fyne/v2/layout"
-	/* "fyne.io/fyne/v2/widget" */
+/* 	"fyne.io/fyne/v2/widget" */
 
 	/* "test/anna" */
 	"test/elem"
 	"test/menu"
+
 	/* "test/window" */
 	/* 	"test/apps" */
 	"test/consts"
 	/* "test/elem" */)
 
-func (c *Cryptor) CreateMainWindow() fyne.Window {
+func (c *Cryptor) Start() /* fyne.Window */ {
 	c.textField.SetPlaceHolder(consts.LABEL_RULES)
 	c.keyWord.SetPlaceHolder(consts.KEY_WORD_TITLE)
 	c.textField.Wrapping = fyne.TextWrapWord
-	/* c.button = *elem.NewButton(consts.BUTTON_TEXT, c.startCrypt) */
 
 	window := c.App.NewWindow(consts.NAME_WINDOW_MAIN)
 	c.mainwindow = window
 
 	mainMenu := menu.CreateMenu()
 
-	elem.LabelRules.TextStyle = fyne.TextStyle{Italic: true}
-
 	containerProgressbar := container.NewVBox(c.GetProgressBar())
-	/* c.GetProgressBar().Resize(fyne.NewSize(500, 10)) */
 	c.GetProgressBar().Hide()
 
 	window.SetMainMenu(mainMenu)
 	window.SetContent(c.createContainers(containerProgressbar))
 	window.Resize(fyne.NewSize(consts.WINDOW_WEIGHT, consts.WINDOW_HEIGHT))
-	return window
+
+	window.Show()
+	window.SetMaster()
+
 }
 
 func (c *Cryptor) createContainers(pb *fyne.Container) *fyne.Container {
@@ -82,5 +82,6 @@ func (c *Cryptor) createContainers(pb *fyne.Container) *fyne.Container {
 		pb,
 		/* layout.NewSpacer(), */
 		containerWithAllButton)
+
 	return containerFull
 }

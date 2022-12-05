@@ -43,18 +43,11 @@ func NewCryptor(app fyne.App) *Cryptor {
 	}
 }
 
+
 func createMultiLineEntry() *widget.Entry {
 	multiLineTextField := widget.NewMultiLineEntry()
 	return multiLineTextField
 }
-
-/* func (c *Cryptor) SetWidgetsInCryptor() {
-	c.textField.SetPlaceHolder(consts.LABEL_RULES)
-	c.keyWord.SetPlaceHolder(consts.KEY_WORD_TITLE)
-	c.textField.Wrapping = fyne.TextWrapWord
-	c.button = *elem.NewButton(consts.BUTTON_TEXT, c.startCrypt)
-	c.mainwindow = c.createMainWindow()
-} */
 
 func (c *Cryptor) converToFloat() {
 	if s, err := strconv.ParseFloat(c.textField.Text, 64); err == nil {
