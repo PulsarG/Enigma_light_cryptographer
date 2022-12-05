@@ -14,16 +14,15 @@ import (
 	"fyne.io/fyne/v2/container"
 	/* "fyne.io/fyne/v2/dialog" */
 	"fyne.io/fyne/v2/layout"
-/* 	"fyne.io/fyne/v2/widget" */
+	/* 	"fyne.io/fyne/v2/widget" */
 
 	/* "test/anna" */
-	"test/elem"
 	"test/menu"
-
 	/* "test/window" */
 	/* 	"test/apps" */
 	"test/consts"
-	/* "test/elem" */)
+	"test/elem"
+)
 
 func (c *Cryptor) Start() /* fyne.Window */ {
 	c.textField.SetPlaceHolder(consts.LABEL_RULES)
@@ -57,31 +56,36 @@ func (c *Cryptor) createContainers(pb *fyne.Container) *fyne.Container {
 			c.GetColorButtonWithSize(200, 40),
 		),
 	)
-	containerWithKeyAndButtonStart.Move(fyne.NewPos(0, 50))
+	/* containerWithKeyAndButtonStart.Move(fyne.NewPos(0, -150)) */
 
 	btnOpen := elem.NewButton("Открыть файл и расшифровать", c.openFile)
 
 	containerBtnOpen := container.NewWithoutLayout(btnOpen)
 	btnOpen.Resize(fyne.NewSize(300, 40))
-	btnOpen.Move(fyne.NewPos(-30, 20))
+	btnOpen.Move(fyne.NewPos(-30, -20))
 
-	containerWithOpenButton := container.NewHBox(
+	containerWithOpenButton := container.NewGridWithColumns(2,
 		layout.NewSpacer(),
 		containerBtnOpen,
 	)
 
-	containerWithAllButton := container.NewVBox(
+	containerWithAllButton := container.NewGridWithRows(4,
+		pb,
 		containerWithKeyAndButtonStart,
 		layout.NewSpacer(),
 		containerWithOpenButton,
 	)
 
-	containerFull := container.NewVBox(
-		/* elem.LabelRules, */
+	containerFull := container.NewGridWithRows(2,
 		containerTextField,
-		pb,
-		/* layout.NewSpacer(), */
+		/* pb, */
 		containerWithAllButton)
 
+	/* endCont := container.NewVBox(
+		containerFull,
+		pb,
+		containerWithAllButton,
+	) */
+	
 	return containerFull
 }

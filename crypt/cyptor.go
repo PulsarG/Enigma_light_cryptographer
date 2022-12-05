@@ -41,6 +41,7 @@ func NewCryptor(app fyne.App) *Cryptor {
 		App:       app,
 		Resulter:  NewResulter(app),
 	}
+	
 }
 
 
