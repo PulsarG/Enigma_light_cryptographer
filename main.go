@@ -10,11 +10,27 @@ func main() {
 	app := app.New()
 
 	Cryptor := crypt.NewCryptor(app)
-	Cryptor.SetWidgetsInCryptor()
+	/* Cryptor.SetWidgetsInCryptor() */
 
-	windowMain := Cryptor.GetWindowMain()
+	windowMain := Cryptor.CreateMainWindow()
 
 	windowMain.Show()
 	windowMain.SetMaster()
 	app.Run()
 }
+
+/*
+__      _________      __
+\ \    / /_   _\ \    / /\
+ \ \  / /  | |  \ \  / /  \
+  \ \/ /   | |   \ \/ / /\ \
+   \  /   _| |_   \  / ____ \
+ _  \/   |_____|  _\/_/    \_\     _   _
+| | | |          |  _ \           | | | |
+| |_| |__   ___  | |_) | ___  __ _| |_| | ___  ___
+| __| '_ \ / _ \ |  _ < / _ \/ _` | __| |/ _ \/ __|
+| |_| | | |  __/ | |_) |  __/ (_| | |_| |  __/\__ \
+ \__|_| |_|\___| |____/ \___|\__,_|\__|_|\___||___/
+
+
+*/

@@ -16,7 +16,7 @@ import (
 
 type Resulter struct {
 	code   string
-	button widget.Button
+	/* button widget.Button */
 
 	App          fyne.App
 	windowResult fyne.Window
