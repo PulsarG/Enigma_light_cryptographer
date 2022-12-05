@@ -56,7 +56,6 @@ func (c *Cryptor) createContainers(pb *fyne.Container) *fyne.Container {
 			c.GetColorButtonWithSize(200, 40),
 		),
 	)
-	/* containerWithKeyAndButtonStart.Move(fyne.NewPos(0, -150)) */
 
 	btnOpen := elem.NewButton("Открыть файл и расшифровать", c.openFile)
 
@@ -81,11 +80,5 @@ func (c *Cryptor) createContainers(pb *fyne.Container) *fyne.Container {
 		/* pb, */
 		containerWithAllButton)
 
-	/* endCont := container.NewVBox(
-		containerFull,
-		pb,
-		containerWithAllButton,
-	) */
-	
 	return containerFull
 }

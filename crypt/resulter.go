@@ -5,18 +5,16 @@ import (
 	"io"
 
 	"fyne.io/fyne/v2"
-/* 	"fyne.io/fyne/v2/container" */
+	/* 	"fyne.io/fyne/v2/container" */
 	"fyne.io/fyne/v2/dialog"
 	/* "fyne.io/fyne/v2/layout" */
 	"fyne.io/fyne/v2/widget"
 
 	"test/consts"
-	/* "test/elem" */
-)
+	/* "test/elem" */)
 
 type Resulter struct {
-	code   string
-	/* button widget.Button */
+	code string
 
 	App          fyne.App
 	windowResult fyne.Window
@@ -54,7 +52,11 @@ func (r *Resulter) openWindowResult(code string) {
 func (r *Resulter) saveFile() {
 	dialog.ShowFileSave(
 		func(uc fyne.URIWriteCloser, err error) {
-			io.WriteString(uc, r.code)
+			if uc != nil {
+				io.WriteString(uc, r.code)
+			} else {
+				return
+			}
 		}, r.windowResult,
 	)
 
