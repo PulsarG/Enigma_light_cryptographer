@@ -2,7 +2,7 @@ package consts
 
 const (
 	// Основа окна
-	NAME_WINDOW_MAIN      = "AnnaCrypt v0.3"
+	NAME_WINDOW_MAIN      = "Enigma Light v0.5"
 	NAME_WINDOW_RESULT    = "Result"
 	LABEL_RESULT          = "Результат будет здесь"
 	LABEL_RULES           = "Только буквы русского алфавита,  пробел и символы , . ! ? - ( )"
