@@ -326,7 +326,7 @@ var Rotor3 = []int{
 	12,
 }
 
-var Mirror = [51]int{
+var Mirror = []int{
 	17,
 	42,
 	10,

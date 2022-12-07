@@ -17,7 +17,7 @@ import (
 	/* 	"fyne.io/fyne/v2/widget" */
 
 	/* "test/anna" */
-	"test/menu"
+	/* "test/menu" */
 	/* "test/window" */
 	/* 	"test/apps" */
 	"test/consts"
@@ -32,12 +32,12 @@ func (c *Cryptor) Start() /* fyne.Window */ {
 	window := c.App.NewWindow(consts.NAME_WINDOW_MAIN)
 	c.mainwindow = window
 
-	mainMenu := menu.CreateMenu()
+	/* mainMenu := menu.CreateMenu() */
 
 	containerProgressbar := container.NewVBox(c.GetProgressBar())
 	c.GetProgressBar().Hide()
 
-	window.SetMainMenu(mainMenu)
+	/* window.SetMainMenu(mainMenu) */
 	window.SetContent(c.createContainers(containerProgressbar))
 	window.Resize(fyne.NewSize(consts.WINDOW_WEIGHT, consts.WINDOW_HEIGHT))
 
@@ -53,7 +53,7 @@ func (c *Cryptor) createContainers(pb *fyne.Container) *fyne.Container {
 		container.NewHBox(
 			c.GetKeyWordWithSize(200, 40),
 			layout.NewSpacer(),
-			c.GetColorButtonWithSize(200, 40),
+			c.GetColorButtonWithSize(250, 40),
 		),
 	)
 

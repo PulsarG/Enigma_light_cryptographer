@@ -2,15 +2,15 @@ package consts
 
 const (
 	// Основа окна
-	NAME_WINDOW_MAIN      = "Enigma Light v0.5"
+	NAME_WINDOW_MAIN      = "Enigma Light v0.9.1"
 	NAME_WINDOW_RESULT    = "Result"
-	LABEL_RESULT          = "Результат будет здесь"
-	LABEL_RULES           = "Только буквы русского алфавита,  пробел и символы , . ! ? - ( )"
+	/* LABEL_RESULT          = "Результат будет здесь" */
+	LABEL_RULES           = "Только буквы русского алфавита нижнего регистра," + "\n" + "пробел и символы , . ! ? - ( )" + "\n" + "БЕЗ ПЕРЕХОДА НА НОВУЮ СТРОКУ ENTER"
 	PLACEHOLDER_TEXTFIELD = "Введите текст..."
 	KEY_WORD_TITLE        = "Ключ-слово"
 
 	// Основная кнопка
-	BUTTON_TEXT = "Начать шифрование"
+	BUTTON_TEXT = "Шифровать / Расшифровать"
 
 	// Размеры окна
 	WINDOW_HEIGHT = 550

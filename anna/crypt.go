@@ -87,11 +87,9 @@ func crypting(signArr []string, Rotor1 [51]string, Rotor2, Rotor3 [51]int) strin
 		/* 	i3 := strconv.Itoa(indexForRotor3) */
 		// Поиск Третьего Индекса по значению у = z
 		indexForMirror := findIndexInRotor(indexForRotor3, Rotor3)
-		fmt.Println(indexForMirror)
 		/* iM := strconv.Itoa(indexForMirror) */
 		// Поиск Индекса в Отражателе по z = Хх
-		indexFromMirror := findIndexInRotor(indexForMirror, base.Mirror) + 1
-		fmt.Println(indexFromMirror)
+		indexFromMirror := findIndexInMirror(indexForMirror, base.Mirror) + 1
 		// Поиск значения в Роторе3 по индексу Хх = Уу
 		/* varFromRotor3 := findVarInRotor(indexFromMirror, Rotor3)
 		// Поиск значения в Роторе2 по индексу Уу = Zz
@@ -101,8 +99,6 @@ func crypting(signArr []string, Rotor1 [51]string, Rotor2, Rotor3 [51]int) strin
 		/* x := Rotor3[indexFromMirror] */
 
 		/* y := Rotor2[Rotor3[indexFromMirror]] */
-		fmt.Println(len(Rotor1))
-		fmt.Println(len(base.Mirror))
 		result := Rotor1[Rotor2[Rotor3[indexFromMirror]]]
 		allResult += result
 	}
@@ -153,3 +149,13 @@ func findIndexInMirror(s int, rotor []int) int {
 	return y
 }
 */
+
+func CheckLenKey(key string) bool {
+	keyArr := convertStringToArray(key)
+
+	if len(keyArr) > len(base.SignsArray) {
+		return false
+	} else {
+		return true
+	}
+}

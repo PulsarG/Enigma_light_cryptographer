@@ -41,9 +41,8 @@ func NewCryptor(app fyne.App) *Cryptor {
 		App:       app,
 		Resulter:  NewResulter(app),
 	}
-	
-}
 
+}
 
 func createMultiLineEntry() *widget.Entry {
 	multiLineTextField := widget.NewMultiLineEntry()
@@ -78,7 +77,12 @@ func (c *Cryptor) checkKey() bool {
 	if c.keyWord.Text == "" {
 		return false
 	} else {
-		return true
+		if anna.CheckLenKey(c.keyWord.Text) {
+			return true
+		} else {
+			c.showDialogLongKey()
+			return false
+		}
 	}
 }
 
@@ -137,14 +141,11 @@ func (c *Cryptor) showDialogKeyEmpty() {
 			fmt.Println("No")
 		}
 	}, w) */
-	fmt.Println("3")
 	dialog.ShowCustom(
 		consts.DIALOG_KEY_WINDOW_TITILE,
 		consts.DIALOG_KEY_BTN_TITLE,
 		widget.NewLabel(consts.DIALOG_KEY_ERROR_TEXT),
 		c.mainwindow)
-	fmt.Println("4")
-
 }
 
 func (c *Cryptor) openFile() {
@@ -164,4 +165,12 @@ func (c *Cryptor) openFile() {
 	} else {
 		c.showDialogKeyEmpty()
 	}
+}
+
+func (c *Cryptor) showDialogLongKey() {
+	dialog.ShowCustom(
+		"Ошибка ключа",
+		"Ясно",
+		widget.NewLabel("Это хороший ключ. Но попробуйте покороче."),
+		c.mainwindow)
 }
