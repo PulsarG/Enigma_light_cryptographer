@@ -13,5 +13,5 @@ Golang, Fyne.io framework
 
 ![изображение](https://user-images.githubusercontent.com/93667264/206281229-41300390-2e7b-4eb5-a43f-b8d9810ce561.png)
 
-![изображение]![изображение](https://user-images.githubusercontent.com/93667264/206282684-459df4aa-8a97-4168-95b9-c608326e251e.png)
-![изображение]![изображение](https://user-images.githubusercontent.com/93667264/206282807-5d3a0cf1-f6bd-4c7e-b92a-660db16d7dad.png)
+![изображение](https://user-images.githubusercontent.com/93667264/206282684-459df4aa-8a97-4168-95b9-c608326e251e.png)
+![изображение](https://user-images.githubusercontent.com/93667264/206282807-5d3a0cf1-f6bd-4c7e-b92a-660db16d7dad.png)
