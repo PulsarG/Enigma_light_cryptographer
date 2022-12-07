@@ -2,7 +2,7 @@ package anna
 
 import (
 	"fmt"
-	"strconv"
+	/* "strconv" */
 	"test/base"
 )
 
@@ -62,48 +62,57 @@ func findNumberFromKey(arr []string) (int, int) {
 }
 
 // Перемешивание:
-func replacing(key1, key2, key3 int) ([51]string, [51]string, [51]string) {
+func replacing(key1, key2, key3 int) ([51]string, [51]int, [51]int) {
 	// Перемешиваем первым интом Базовый набор - ротор1
 	newBaseSign := replaceSignArray(key1, base.SignsArray)
 	// Перемешиваем вторым интом второй Ротор2
-	newRotor2 := replaceSignArray(key2, base.Rotor2)
+	newRotor2 := replaceRotor(key2, base.Rotor2)
 	// Перемешиваем третьим интом третий Ротор3
-	newRotor3 := replaceSignArray(key3, base.Rotor3)
+	newRotor3 := replaceRotor(key3, base.Rotor3)
 
 	return newBaseSign, newRotor2, newRotor3
 }
 
 // Для каждого знака из массива строки:
-func crypting(signArr []string, Rotor1, Rotor2, Rotor3 [51]string) string {
+func crypting(signArr []string, Rotor1 [51]string, Rotor2, Rotor3 [51]int) string {
 	var allResult string
 	for i := 0; i < len(signArr); i++ {
 		// Поиск Первого Индекса по знаку = х
-		indexForRotor2 := findIndexInRotor(signArr[i], Rotor1)
-		i2 := strconv.Itoa(indexForRotor2)
+		indexForRotor2 := findIndexInFirstRotor(signArr[i], Rotor1)
+		/* fmt.Println(indexForRotor2) */
+		/* i2 := strconv.Itoa(indexForRotor2) */
 		// Поиск Второго Индекса по значению х = у
-		indexForRotor3 := findIndexInRotor(i2, Rotor2)
-		i3 := strconv.Itoa(indexForRotor3)
+		indexForRotor3 := findIndexInRotor(indexForRotor2, Rotor2)
+		/* fmt.Println(indexForRotor3) */
+		/* 	i3 := strconv.Itoa(indexForRotor3) */
 		// Поиск Третьего Индекса по значению у = z
-		indexForMirror := findIndexInRotor(i3, Rotor3)
-		iM := strconv.Itoa(indexForMirror)
+		indexForMirror := findIndexInRotor(indexForRotor3, Rotor3)
+		fmt.Println(indexForMirror)
+		/* iM := strconv.Itoa(indexForMirror) */
 		// Поиск Индекса в Отражателе по z = Хх
-		indexFromMirror := findIndexInMirror(iM, base.Mirror)
+		indexFromMirror := findIndexInRotor(indexForMirror, base.Mirror) + 1
+		fmt.Println(indexFromMirror)
 		// Поиск значения в Роторе3 по индексу Хх = Уу
-		varFromRotor3 := findVarInRotor(indexFromMirror, Rotor3)
+		/* varFromRotor3 := findVarInRotor(indexFromMirror, Rotor3)
 		// Поиск значения в Роторе2 по индексу Уу = Zz
 		varFromRotor2 := findVarInRotor(int(varFromRotor3), Rotor2)
 		// Получение Результата-Знака в Роторе1 - Базовом наборе по индексу Zz = Result
-		result := Rotor1[varFromRotor2]
+		result := Rotor1[varFromRotor2] */
+		/* x := Rotor3[indexFromMirror] */
+
+		/* y := Rotor2[Rotor3[indexFromMirror]] */
+		fmt.Println(len(Rotor1))
+		fmt.Println(len(base.Mirror))
+		result := Rotor1[Rotor2[Rotor3[indexFromMirror]]]
 		allResult += result
 	}
 	return allResult
 }
 
-func findIndexInRotor(s string, rotor [51]string) int {
+func findIndexInFirstRotor(s string, rotor [51]string) int {
 	var index int
 	for i := 0; i < len(rotor); i++ {
 		if rotor[i] == s {
-			fmt.Println(i, s)
 			index = i
 			break
 		} else {
@@ -113,11 +122,10 @@ func findIndexInRotor(s string, rotor [51]string) int {
 	return index
 }
 
-func findIndexInMirror(s string, rotor []string) int {
+func findIndexInRotor(s int, rotor [51]int) int {
 	var index int
 	for i := 0; i < len(rotor); i++ {
 		if rotor[i] == s {
-			fmt.Println(i, s)
 			index = i
 			break
 		} else {
@@ -127,8 +135,21 @@ func findIndexInMirror(s string, rotor []string) int {
 	return index
 }
 
-func findVarInRotor(i int, rotor [51]string) int64 {
+func findIndexInMirror(s int, rotor []int) int {
+	var index int
+	for i := 0; i < len(rotor); i++ {
+		if rotor[i] == s {
+			index = i
+			break
+		} else {
+			continue
+		}
+	}
+	return index
+}
+
+/* func findVarInRotor(i int, rotor [51]int) int {
 	x := rotor[i]
-	y, _ := strconv.ParseInt(x, 6, 12)
 	return y
 }
+*/
