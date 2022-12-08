@@ -2,8 +2,8 @@ package anna
 
 /* import "test/base" */
 
-func replaceSignArray(n int, a []string) [51]string {
-	var newSignArr [51]string
+func replaceSignArray(n int, a []string) []string {
+	var newSignArr []string
 
 	for i := 0; i < len(a); i++ {
 		sign := a[i]
@@ -11,19 +11,21 @@ func replaceSignArray(n int, a []string) [51]string {
 			j := i
 			j += len(a)
 			j -= n
-			newSignArr[j] = sign
+			newSignArr = append(newSignArr, sign)
+			/* newSignArr[j] = sign */
 		} else {
 			j := i
 			j -= n
-			newSignArr[j] = sign
+			newSignArr = append(newSignArr, sign)
+			/* newSignArr[j] = sign */
 		}
 	}
 
 	return newSignArr
 }
 
-func replaceRotor(n int, a []int) [51]int {
-	var newSignArr [51]int
+func replaceRotor(n int, a []int) []int {
+	var newSignArr []int
 
 	for i := 0; i < len(a); i++ {
 		sign := a[i]
@@ -31,11 +33,13 @@ func replaceRotor(n int, a []int) [51]int {
 			j := i
 			j += len(a)
 			j -= n
-			newSignArr[j] = sign
+			newSignArr = append(newSignArr, sign)
+			/* newSignArr[j] = sign */
 		} else {
 			j := i
 			j -= n
-			newSignArr[j] = sign
+			newSignArr = append(newSignArr, sign)
+			/* newSignArr[j] = sign */
 		}
 	}
 
