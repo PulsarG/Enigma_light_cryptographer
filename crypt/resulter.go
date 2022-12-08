@@ -10,8 +10,8 @@ import (
 	/* "fyne.io/fyne/v2/layout" */
 	"fyne.io/fyne/v2/widget"
 
-	"test/consts"
-	/* "test/elem" */)
+	"enigma/consts"
+	/* "enigma/elem" */)
 
 type Resulter struct {
 	code string

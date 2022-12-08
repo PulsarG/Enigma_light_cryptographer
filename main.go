@@ -19,7 +19,7 @@ package main
 import (
 	"fyne.io/fyne/v2/app"
 
-	"test/crypt"
+	"enigma/crypt"
 )
 
 func main() {

@@ -12,8 +12,8 @@ import (
 	"fyne.io/fyne/v2/theme"
 	"fyne.io/fyne/v2/widget"
 
-	/* 	"test/consts" */
-	"test/elem"
+	/* 	"enigma/consts" */
+	"enigma/elem"
 )
 
 func (r *Resulter) createContainersForWindowResult() *fyne.Container {

@@ -6,7 +6,7 @@ import (
 	"fyne.io/fyne/v2"
 	/* "fyne.io/fyne/v2/widget" */
 
-	"test/consts"
+	"enigma/consts"
 )
 
 func CreateMenu() *fyne.MainMenu {

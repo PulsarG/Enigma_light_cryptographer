@@ -16,13 +16,12 @@ import (
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 
-	"test/anna"
-	"test/elem"
-	/* 	"test/menu" */
-	/* "test/window" */
-	/* 	"test/apps" */
-	"test/consts"
-	/* "test/elem" */)
+	"enigma/anna"
+	"enigma/elem"
+	/* 	"enigma/menu" */
+	/* "enigma/window" */
+	"enigma/consts"
+	/* "enigma/elem" */)
 
 type Cryptor struct {
 	textField   *widget.Entry

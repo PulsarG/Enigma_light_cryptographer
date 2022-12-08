@@ -2,7 +2,7 @@ package consts
 
 const (
 	// Основа окна
-	NAME_WINDOW_MAIN      = "Enigma Light v0.9.2"
+	NAME_WINDOW_MAIN      = "Enigma Light v0.9.3"
 	NAME_WINDOW_RESULT    = "Result"
 	/* LABEL_RESULT          = "Результат будет здесь" */
 	LABEL_RULES           = "Только буквы русского алфавита нижнего регистра," + "\n" + "пробел и символы , . ! ? - ( )"

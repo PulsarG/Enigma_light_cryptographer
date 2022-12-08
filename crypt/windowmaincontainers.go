@@ -16,12 +16,12 @@ import (
 	"fyne.io/fyne/v2/layout"
 	/* 	"fyne.io/fyne/v2/widget" */
 
-	/* "test/anna" */
-	/* "test/menu" */
-	/* "test/window" */
-	/* 	"test/apps" */
-	"test/consts"
-	"test/elem"
+	/* "enigma/anna" */
+	/* "enigma/menu" */
+	/* "enigma/window" */
+	/* 	"enigma/apps" */
+	"enigma/consts"
+	"enigma/elem"
 )
 
 func (c *Cryptor) Start() /* fyne.Window */ {
