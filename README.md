@@ -12,7 +12,7 @@ Golang, Fyne.io framework
 
 ! На данный момент преставленная версия ( 0.9.+ ) является тестовой и поддерживает лишь кириллицу в нижнем регистре, цифры и популярные символы. 
 
-![изображение](https://user-images.githubusercontent.com/93667264/206281229-41300390-2e7b-4eb5-a43f-b8d9810ce561.png)
+![изображение](https://user-images.githubusercontent.com/93667264/206434613-604b728b-7789-46cd-afc5-4d7694b63eb2.png)
 
 ![изображение](https://user-images.githubusercontent.com/93667264/206282684-459df4aa-8a97-4168-95b9-c608326e251e.png)
 ![изображение](https://user-images.githubusercontent.com/93667264/206282807-5d3a0cf1-f6bd-4c7e-b92a-660db16d7dad.png)
