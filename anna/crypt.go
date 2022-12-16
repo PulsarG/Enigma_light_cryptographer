@@ -13,6 +13,8 @@ func StartCrypt(text, key string) (string, bool) {
 
 	s := crypting(signArr, Rotor1, Rotor2, Rotor3)
 
+	fmt.Println(len(Rotor1), len(Rotor2), len(Rotor3), len(base.Mirror))
+
 	return s, true
 }
 
@@ -33,7 +35,7 @@ func getKeyWordData(key string) (int, int, int) {
 
 	x, y = findNumberFromKey(keyArr)
 	z = len(keyArr)
-	
+
 	return x, y, z
 }
 
@@ -67,9 +69,9 @@ func replacing(key1, key2, key3 int) ([52]string, [52]int, [52]int) {
 	// Перемешиваем первым интом Базовый набор - ротор1
 	newBaseSign := replaceSignArray(key1, base.SignsArray)
 	// Перемешиваем вторым интом второй Ротор2
-	newRotor2 := replaceRotor(key2, base.Rotor2)
+	newRotor2 := replaceRotor(key2, base.Mirror)
 	// Перемешиваем третьим интом третий Ротор3
-	newRotor3 := replaceRotor(key3, base.Rotor3)
+	newRotor3 := replaceRotor(key3, base.Mirror)
 
 	return newBaseSign, newRotor2, newRotor3
 }
@@ -85,7 +87,7 @@ func crypting(signArr []string, Rotor1 [52]string, Rotor2, Rotor3 [52]int) strin
 		// Поиск Третьего Индекса по значению у = z
 		indexForMirror := findIndexInRotor(indexForRotor3, Rotor3)
 		// Поиск Индекса в Отражателе по z = Хх
-		indexFromMirror := findIndexInMirror(indexForMirror, base.Mirror)
+		indexFromMirror := base.Mirror[indexForMirror]
 		// Поиск значения в Роторе3 2 1 по индексу Хх = Уу
 		result := Rotor1[Rotor2[Rotor3[indexFromMirror]]]
 		allResult += result
@@ -119,7 +121,7 @@ func findIndexInRotor(s int, rotor [52]int) int {
 	return index
 }
 
-func findIndexInMirror(s int, rotor []int) int {
+func findIndexInMirror(s int, rotor [52]int) int {
 	var index int
 	for i := 0; i < len(rotor); i++ {
 		if rotor[i] == s {
@@ -129,6 +131,7 @@ func findIndexInMirror(s int, rotor []int) int {
 			continue
 		}
 	}
+	fmt.Println(index)
 	return index
 }
 
