@@ -1,16 +1,16 @@
 package src
 
 import (
-	/* "fmt"
+	/* "fmt" */
 	"image/color"
-	"io"
+	/* "io"
 	"reflect"
-	"strconv"
-	*/
+	"strconv" */
+
 	/* "strings" */
 
 	"fyne.io/fyne/v2"
-	/* 	"fyne.io/fyne/v2/canvas" */
+	"fyne.io/fyne/v2/canvas"
 	"fyne.io/fyne/v2/container"
 	/* "fyne.io/fyne/v2/dialog" */
 	"fyne.io/fyne/v2/layout"
@@ -58,17 +58,19 @@ func (c *Cryptor) createContainers(pb *fyne.Container) *fyne.Container {
 		containerBtnOpen,
 	)
 
-	/* c.button = elem.NewButton(consts.BUTTON_TEXT, c.startCrypt)
-	containerBtn := container.NewWithoutLayout(c.button)
-	c.button.Resize(fyne.NewSize(250, 40))
-	c.button.Move(fyne.NewPos(0, 0)) */
+	color := color.RGBA{11, 78, 150, 1}
+	btn := container.New(
+		layout.NewMaxLayout(),
+		canvas.NewRectangle(color),
+		c.GetButton(),
+	)
 
 	containerWithKeyAndButtonStart := container.NewVBox(
-		container.NewHBox(
+		container.NewGridWithColumns(2,
 			c.GetKeyWordWithSize(200, 40),
-			layout.NewSpacer(),
+			/* layout.NewSpacer(), */
 			/* containerBtn, */
-			c.GetColorButtonWithSize(200, 40),
+			btn,
 		),
 		containerWithOpenButton,
 	)

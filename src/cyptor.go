@@ -6,7 +6,7 @@ import (
 	"io"
 	/* "reflect"
 	"strconv"
- */
+	*/
 	/* "strings" */
 
 	"fyne.io/fyne/v2"
@@ -16,7 +16,7 @@ import (
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 
-	"enigma/anna"
+	"enigma/enigma"
 	"enigma/elem"
 
 	/* 	"enigma/menu" */
@@ -69,7 +69,7 @@ func (c *Cryptor) startCrypt() {
 	if c.checkKey() {
 		c.progressBar.Show()
 
-		code, ready := anna.StartCrypt(c.textField.Text, c.keyWord.Text)
+		code, ready := enigma.StartCrypt(c.textField.Text, c.keyWord.Text)
 
 		if ready {
 			c.Resulter.openWindowResult(code)
@@ -84,7 +84,7 @@ func (c *Cryptor) checkKey() bool {
 	if c.keyWord.Text == "" {
 		return false
 	} else {
-		if anna.CheckLenKey(c.keyWord.Text) {
+		if enigma.CheckLenKey(c.keyWord.Text) {
 			return true
 		} else {
 			c.showDialogLongKey()
@@ -109,6 +109,7 @@ func (c *Cryptor) GetKeyWordWithSize(w, h float32) *fyne.Container {
 }
 
 func (c *Cryptor) GetButton() *widget.Button {
+	c.button = elem.NewButton(consts.BUTTON_TEXT, c.startCrypt)
 	return c.button
 }
 
