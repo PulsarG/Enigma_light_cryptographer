@@ -16,8 +16,8 @@ import (
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 
-	"enigma/enigma"
 	"enigma/elem"
+	"enigma/enigma"
 
 	/* 	"enigma/menu" */
 	/* "enigma/window" */
@@ -74,7 +74,12 @@ func (c *Cryptor) startCrypt() {
 		if ready {
 			c.Resulter.openWindowResult(code)
 			c.progressBar.Hide()
+		} else {
+			c.progressBar.Hide()
+			c.showDialogWrongSing(code)
+			return
 		}
+
 	} else {
 		c.showDialogKeyEmpty()
 	}
@@ -189,5 +194,13 @@ func (c *Cryptor) showDialogLongKey() {
 		"Ошибка ключа",
 		"Ясно",
 		widget.NewLabel("Это хороший ключ. Но попробуйте покороче."),
+		c.mainwindow)
+}
+
+func (c *Cryptor) showDialogWrongSing(s string) {
+	dialog.ShowCustom(
+		"Ошибка вводимого текста",
+		"ОК",
+		widget.NewLabel("Имеется не допустимый знак: "+s),
 		c.mainwindow)
 }

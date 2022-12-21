@@ -1,7 +1,6 @@
 package consts
 
-var NAME_WINDOW_MAIN, // Основа окна
-	NAME_WINDOW_RESULT,
+var NAME_WINDOW_RESULT, // Основа окна
 	LABEL_RULES,
 	KEY_WORD_TITLE,
 	BUTTON_TEXT, // Основная кнопка
@@ -16,15 +15,23 @@ var NAME_WINDOW_MAIN, // Основа окна
 	BUTTON_RESULTWINDOW_SAVE_FILE, // Окно результата, кнопки
 	BUTTON_RESULTWINDOW_COPY string
 
-var WINDOW_HEIGHT, // Размеры окна
-	WINDOW_WEIGHT,
-	BUTTON_SAVE_WEIGHT, // Кнопка сохранения
-	BUTTON_SAVE_HEIGHT float32
+const (
+	// Версия приложения
+	VERSION_APP      = "v0.9.6"
+	NAME_WINDOW_MAIN = "Enigma Light " + VERSION_APP
+	
+	// Размеры окна
+	WINDOW_HEIGHT = 550
+	WINDOW_WEIGHT = 550
+
+	// Кнопка сохранения
+	BUTTON_SAVE_WEIGHT = 200
+	BUTTON_SAVE_HEIGHT = 40
+)
 
 func ChangeLang(b bool) {
 	if b {
 		// Основа окна
-		NAME_WINDOW_MAIN = "Enigma Light v0.9.4"
 		NAME_WINDOW_RESULT = "Результат"
 		LABEL_RULES = "Только буквы русского алфавита нижнего регистра," + "\n" + "пробел и символы , . ! ? - ( )"
 		KEY_WORD_TITLE = "Ключ-слово"
@@ -32,14 +39,6 @@ func ChangeLang(b bool) {
 		// Основная кнопка
 		BUTTON_TEXT = "Шифровать / Расшифровать"
 		BUTTON_OPEN_FILE = "Открыть файл"
-
-		// Размеры окна
-		WINDOW_HEIGHT = 550
-		WINDOW_WEIGHT = 550
-
-		// Кнопка сохранения
-		BUTTON_SAVE_WEIGHT = 200
-		BUTTON_SAVE_HEIGHT = 40
 
 		// Меню
 		TITLE_SUBMENU_ONE = "Setting"
@@ -59,7 +58,6 @@ func ChangeLang(b bool) {
 		BUTTON_RESULTWINDOW_COPY = "Скопировать"
 	} else {
 		// Основа окна
-		NAME_WINDOW_MAIN = "Enigma Light v0.9.4"
 		NAME_WINDOW_RESULT = "Result"
 		LABEL_RULES = "Only lowercase letters of the Russian alphabet, space and symbols" + "\n" + " , . ! ? - ( )"
 		KEY_WORD_TITLE = "Key-word"
@@ -67,14 +65,6 @@ func ChangeLang(b bool) {
 		// Основная кнопка
 		BUTTON_TEXT = "Crypt / Uncrypt"
 		BUTTON_OPEN_FILE = "Open file"
-
-		// Размеры окна
-		WINDOW_HEIGHT = 550
-		WINDOW_WEIGHT = 550
-
-		// Кнопка сохранения
-		BUTTON_SAVE_WEIGHT = 200
-		BUTTON_SAVE_HEIGHT = 40
 
 		// Меню
 		TITLE_SUBMENU_ONE = "Setting"
