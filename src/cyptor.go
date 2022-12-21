@@ -17,10 +17,10 @@ import (
 	"fyne.io/fyne/v2/widget"
 
 	"enigma/elem"
-	"enigma/enigma"
+	"enigma/enigmasistem"
 
-	/* 	"enigma/menu" */
-	/* "enigma/window" */
+	/* 	"enigmasistem/menu" */
+	/* "enigmasistem/window" */
 	"enigma/consts"
 )
 
@@ -69,7 +69,7 @@ func (c *Cryptor) startCrypt() {
 	if c.checkKey() {
 		c.progressBar.Show()
 
-		code, ready := enigma.StartCrypt(c.textField.Text, c.keyWord.Text)
+		code, ready := enigmasistem.StartCrypt(c.textField.Text, c.keyWord.Text)
 
 		if ready {
 			c.Resulter.openWindowResult(code)
@@ -89,7 +89,7 @@ func (c *Cryptor) checkKey() bool {
 	if c.keyWord.Text == "" {
 		return false
 	} else {
-		if enigma.CheckLenKey(c.keyWord.Text) {
+		if enigmasistem.CheckLenKey(c.keyWord.Text) {
 			return true
 		} else {
 			c.showDialogLongKey()

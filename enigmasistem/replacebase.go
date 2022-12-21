@@ -1,4 +1,4 @@
-package enigma
+package enigmasistem
 
 /* import "test/base" */
 
