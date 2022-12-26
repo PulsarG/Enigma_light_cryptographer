@@ -56,17 +56,8 @@ func createMultiLineEntry() *widget.Entry {
 	return multiLineTextField
 }
 
-/* func (c *Cryptor) converToFloat() {
-	if s, err := strconv.ParseFloat(c.textField.Text, 64); err == nil {
-		fmt.Println(s)
-		fmt.Println(reflect.TypeOf(s))
-	} else {
-		fmt.Println("Не верно введены цифры", err)
-	}
-} */
-
 func (c *Cryptor) startCrypt() {
-	if c.checkKey() {
+	/* if c.checkKey() { */
 		c.progressBar.Show()
 
 		code, ready := enigmasistem.StartCrypt(c.textField.Text, c.keyWord.Text)
@@ -76,25 +67,20 @@ func (c *Cryptor) startCrypt() {
 			c.progressBar.Hide()
 		} else {
 			c.progressBar.Hide()
-			c.showDialogWrongSing(code)
+			c.showDialogWrong(code)
 			return
 		}
-
+/* 
 	} else {
 		c.showDialogKeyEmpty()
-	}
+	} */
 }
 
 func (c *Cryptor) checkKey() bool {
 	if c.keyWord.Text == "" {
 		return false
 	} else {
-		if enigmasistem.CheckLenKey(c.keyWord.Text) {
-			return true
-		} else {
-			c.showDialogLongKey()
-			return false
-		}
+		return true
 	}
 }
 
@@ -136,35 +122,9 @@ func (c *Cryptor) GetProgressBar() *widget.ProgressBarInfinite {
 	return &c.progressBar
 }
 
-/* func (c *Cryptor) GetLang() bool {
-	return c.isRus
-} */
-
-/* func (c *Cryptor) SetLang(b bool) {
-	c.isRus = b
-} */
-
 func (c *Cryptor) showDialogKeyEmpty() {
-
-	/* dialog.ShowConfirm("Dialog Window", "Hello, World", func(b bool) {
-		if b == true {
-			fmt.Println("Yes")
-
-		} else {
-			fmt.Println("No")
-		}
-	}, w) */
-
-	/* dialog.ShowCustomConfirm("Hello", "Да", "Нет", widget.NewLabel("Set answer"), func(b bool) {
-		if b == true {
-			fmt.Println("Yes")
-
-		} else {
-			fmt.Println("No")
-		}
-	}, w) */
 	dialog.ShowCustom(
-		consts.DIALOG_KEY_WINDOW_TITILE,
+		consts.DIALOG_KEY_WINDOW_TITLE,
 		consts.DIALOG_KEY_BTN_TITLE,
 		widget.NewLabel(consts.DIALOG_KEY_ERROR_TEXT),
 		c.mainwindow)
@@ -189,18 +149,10 @@ func (c *Cryptor) openFile() {
 	}
 }
 
-func (c *Cryptor) showDialogLongKey() {
+func (c *Cryptor) showDialogWrong(s string) {
 	dialog.ShowCustom(
-		"Ошибка ключа",
-		"Ясно",
-		widget.NewLabel("Это хороший ключ. Но попробуйте покороче."),
-		c.mainwindow)
-}
-
-func (c *Cryptor) showDialogWrongSing(s string) {
-	dialog.ShowCustom(
-		"Ошибка вводимого текста",
+		consts.DIALOG_KEY_WINDOW_TITLE,
 		"ОК",
-		widget.NewLabel("Имеется не допустимый знак: "+s),
+		widget.NewLabel(s),
 		c.mainwindow)
 }

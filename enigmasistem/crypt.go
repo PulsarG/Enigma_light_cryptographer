@@ -2,9 +2,19 @@ package enigmasistem
 
 import (
 	"fmt"
-	/* "strconv" */ /* "enigma/base" */)
+)
 
 func StartCrypt(text, key string) (string, bool) {
+	// Проверка наличия ключа
+	if key == "" {
+		return "Key is empty", false
+	}
+	// Проверка на длину ключа
+	short := checkLenKey(key)
+	if !short {
+		return "Sorry, but Key is Very Long", false
+	}
+
 	signArr := convertStringToArray(text)
 	key1, key2, key3 := getKeyWordData(key)
 	Rotor1, Rotor2, Rotor3 := replacing(key1, key2, key3)
@@ -15,10 +25,8 @@ func StartCrypt(text, key string) (string, bool) {
 	if !isWrong {
 		s = crypting(signArr, Rotor1, Rotor2, Rotor3)
 	} else {
-		return wrongSing, false
+		return "Not valid character: " + wrongSing, false
 	}
-
-	/* fmt.Println(len(Rotor1), len(Rotor2), len(Rotor3), len(Mirror)) */
 
 	return s, true
 }
@@ -126,21 +134,7 @@ func findIndexInRotor(s int, rotor [52]int) int {
 	return index
 }
 
-func findIndexInMirror(s int, rotor [52]int) int {
-	var index int
-	for i := 0; i < len(rotor); i++ {
-		if rotor[i] == s {
-			index = i
-			break
-		} else {
-			continue
-		}
-	}
-	fmt.Println(index)
-	return index
-}
-
-func CheckLenKey(key string) bool {
+func checkLenKey(key string) bool {
 	keyArr := convertStringToArray(key)
 
 	if len(keyArr) > len(SignsArray) {

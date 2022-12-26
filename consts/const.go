@@ -9,17 +9,18 @@ var NAME_WINDOW_RESULT, // Основа окна
 	MENU_SUBMENU_ONE_BTN_ONE_TITLE,
 	MENU_SUBMENU_ONE_BTN_RUSSIAN,
 	MENU_SUBMENU_ONE_BTN_ENGL,
-	DIALOG_KEY_WINDOW_TITILE, // Диалог отсутствия ключа-слова
+	DIALOG_KEY_WINDOW_TITLE, // Диалог отсутствия ключа-слова
 	DIALOG_KEY_ERROR_TEXT,
 	DIALOG_KEY_BTN_TITLE,
 	BUTTON_RESULTWINDOW_SAVE_FILE, // Окно результата, кнопки
-	BUTTON_RESULTWINDOW_COPY string
+	BUTTON_RESULTWINDOW_COPY,
+	DIALOG_ERROR string
 
 const (
 	// Версия приложения
 	VERSION_APP      = "v0.9.6"
 	NAME_WINDOW_MAIN = "Enigma Light " + VERSION_APP
-	
+
 	// Размеры окна
 	WINDOW_HEIGHT = 550
 	WINDOW_WEIGHT = 550
@@ -49,9 +50,10 @@ func ChangeLang(b bool) {
 		MENU_SUBMENU_ONE_BTN_ENGL = "English"
 
 		// Диалог отсутствия ключа-слова
-		DIALOG_KEY_WINDOW_TITILE = "Проблема шифрования"
+		DIALOG_KEY_WINDOW_TITLE = "Проблема шифрования"
 		DIALOG_KEY_ERROR_TEXT = "Не введено ключ-слово"
 		DIALOG_KEY_BTN_TITLE = "Ясно"
+		/* DIALOG_ERROR = "Ошибка ключа или вводимого текста" */
 
 		// Окно результата, кнопки
 		BUTTON_RESULTWINDOW_SAVE_FILE = "Сохранить в файл"
@@ -63,7 +65,7 @@ func ChangeLang(b bool) {
 		KEY_WORD_TITLE = "Key-word"
 
 		// Основная кнопка
-		BUTTON_TEXT = "Crypt / Uncrypt"
+		BUTTON_TEXT = "Encrypt / Decrypt"
 		BUTTON_OPEN_FILE = "Open file"
 
 		// Меню
@@ -75,9 +77,10 @@ func ChangeLang(b bool) {
 		MENU_SUBMENU_ONE_BTN_ENGL = "English"
 
 		// Диалог отсутствия ключа-слова
-		DIALOG_KEY_WINDOW_TITILE = "Проблема шифрования"
-		DIALOG_KEY_ERROR_TEXT = "Не введено ключ-слово"
-		DIALOG_KEY_BTN_TITLE = "Ясно"
+		DIALOG_KEY_WINDOW_TITLE = "Encryption problem"
+		DIALOG_KEY_ERROR_TEXT = "Keyword not entered"
+		DIALOG_KEY_BTN_TITLE = "OK"
+	/* 	DIALOG_ERROR = "Key or input text error" */
 
 		// Окно результата, кнопки
 		BUTTON_RESULTWINDOW_SAVE_FILE = "Save in file"
