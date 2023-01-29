@@ -34,7 +34,7 @@ func ChangeLang(b bool) {
 	if b {
 		// Основа окна
 		NAME_WINDOW_RESULT = "Результат"
-		LABEL_RULES = "Только буквы русского алфавита нижнего регистра," + "\n" + "пробел и символы , . ! ? - ( )"
+		LABEL_RULES = "Введи текст здесь..."
 		KEY_WORD_TITLE = "Ключ-слово"
 
 		// Основная кнопка
@@ -61,7 +61,7 @@ func ChangeLang(b bool) {
 	} else {
 		// Основа окна
 		NAME_WINDOW_RESULT = "Result"
-		LABEL_RULES = "Only lowercase letters of the Russian alphabet, space and symbols" + "\n" + " , . ! ? - ( )"
+		LABEL_RULES = "Enter text here..."
 		KEY_WORD_TITLE = "Key-word"
 
 		// Основная кнопка

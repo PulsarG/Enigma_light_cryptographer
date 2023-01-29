@@ -1,13 +1,8 @@
 package src
 
 import (
-	/* "fmt" */
 	"image/color"
 	"io"
-	/* "reflect"
-	"strconv"
-	*/
-	/* "strings" */
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
@@ -16,12 +11,10 @@ import (
 	"fyne.io/fyne/v2/layout"
 	"fyne.io/fyne/v2/widget"
 
-	"enigma/elem"
-	"enigma/enigmasistem"
-
-	/* 	"enigmasistem/menu" */
-	/* "enigmasistem/window" */
 	"enigma/consts"
+	"enigma/elem"
+
+	"github.com/PulsarG/Enigma"
 )
 
 type Cryptor struct {
@@ -42,6 +35,7 @@ type Cryptor struct {
 }
 
 func NewCryptor(app fyne.App) *Cryptor {
+	
 	return &Cryptor{
 		textField: createMultiLineEntry(),
 		App:       app,
@@ -57,23 +51,17 @@ func createMultiLineEntry() *widget.Entry {
 }
 
 func (c *Cryptor) startCrypt() {
-	/* if c.checkKey() { */
-		c.progressBar.Show()
+	c.progressBar.Show()
+	code, ready := enigma.StartCrypt(c.textField.Text, c.keyWord.Text)
 
-		code, ready := enigmasistem.StartCrypt(c.textField.Text, c.keyWord.Text)
-
-		if ready {
-			c.Resulter.openWindowResult(code)
-			c.progressBar.Hide()
-		} else {
-			c.progressBar.Hide()
-			c.showDialogWrong(code)
-			return
-		}
-/* 
+	if ready {
+		c.Resulter.openWindowResult(code)
+		c.progressBar.Hide()
 	} else {
-		c.showDialogKeyEmpty()
-	} */
+		c.progressBar.Hide()
+		c.showDialogWrong(code)
+		return
+	}
 }
 
 func (c *Cryptor) checkKey() bool {
